@@ -1,6 +1,6 @@
-INSERT INTO tb_category (name) VALUES ('Books');
-INSERT INTO tb_category (name) VALUES ('Eletronics');
-INSERT INTO tb_category (name) VALUES ('Computers');
+INSERT INTO tb_category (name, created_At) VALUES ('Books', NOW());
+INSERT INTO tb_category (name, created_At) VALUES ('Eletronics', NOW());
+INSERT INTO tb_category (name, created_At) VALUES ('Computers', NOW());
 
 INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Claudio Cardoso', '023.456.789-89', 1500, '1994-07-20T10:30:00Z', 2);
 INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Gorete Cardoso', '023.456.789-89', 1500, '1994-07-20T10:30:00Z', 2);
