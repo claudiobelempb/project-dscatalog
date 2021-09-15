@@ -3,12 +3,24 @@ package br.com.surb.dscatalog.resources;
 import br.com.surb.dscatalog.dto.CategoryDTO;
 import br.com.surb.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
+/*
+Parâmetros de paginação
+
+@RequestParam(value = "page", defaultValue = "0") Integer page,
+@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+@RequestParam(value = "orderBy", defaultValue = "moment") String orderBy,
+@RequestParam(value = "direction", defaultValue = "DESC") String direction)
+*/
+
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -18,8 +30,17 @@ public class CategoryResource {
   private CategoryService service;
 
   @GetMapping
-  public ResponseEntity<List<CategoryDTO>> index() {
-    List<CategoryDTO> cayegories = service.index();
+  public ResponseEntity<Page<CategoryDTO>> index(
+    @RequestParam(value = "page", defaultValue = "0") Integer page,
+    @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+    @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+    @RequestParam(value = "orderBy", defaultValue = "name") String orderBy
+
+  ) {
+
+    PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+    Page<CategoryDTO> cayegories = service.index(pageRequest);
+
     return ResponseEntity.ok().body(cayegories);
   }
 
