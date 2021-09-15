@@ -4,11 +4,10 @@ import br.com.surb.dscatalog.dto.CategoryDTO;
 import br.com.surb.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,13 +19,20 @@ public class CategoryResource {
 
   @GetMapping
   public ResponseEntity<List<CategoryDTO>> index() {
-    List<CategoryDTO> list = service.index();
-    return ResponseEntity.ok().body(list);
+    List<CategoryDTO> cayegories = service.index();
+    return ResponseEntity.ok().body(cayegories);
   }
 
   @GetMapping(value = "/{id}")
   public ResponseEntity<CategoryDTO> show(@PathVariable Long id){
-    CategoryDTO data = service.show(id);
-    return ResponseEntity.ok().body(data);
+    CategoryDTO category = service.show(id);
+    return ResponseEntity.ok().body(category);
+  }
+
+  @PostMapping
+  public ResponseEntity<CategoryDTO> create(@RequestBody CategoryDTO categoryDTO){
+    categoryDTO = service.create(categoryDTO);
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(categoryDTO.getId()).toUri();
+    return ResponseEntity.created(uri).body(categoryDTO);
   }
 }
