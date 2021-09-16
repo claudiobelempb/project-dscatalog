@@ -2,6 +2,7 @@ package br.com.surb.dscatalog.dto;
 
 import br.com.surb.dscatalog.entities.Client;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -13,18 +14,29 @@ public class ClientDTO implements Serializable {
   private String name;
   private String cpf;
   private Double income;
-  private Instant birthDate;
   private Integer children;
+
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant birthDate;
+
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant createdAt;
+
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant updatedAt;
 
   public ClientDTO(){}
 
-  public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
+  public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children,
+                   Instant createdAt, Instant updatedAt) {
     this.id = id;
     this.name = name;
     this.cpf = cpf;
     this.income = income;
     this.birthDate = birthDate;
     this.children = children;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public ClientDTO(Client client){
@@ -34,6 +46,8 @@ public class ClientDTO implements Serializable {
     this.income = client.getIncome();
     this.birthDate = client.getBirthDate();
     this.children = client.getChildren();
+    this.createdAt = client.getCreatedAt();
+    this.updatedAt = client.getUpdatedAt();
   }
 
   public Long getId() {
@@ -82,6 +96,24 @@ public class ClientDTO implements Serializable {
 
   public void setChildren(Integer children) {
     this.children = children;
+  }
+
+  public Instant getCreatedAt() {
+    return createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return updatedAt;
+  }
+
+  @PrePersist
+  public void preCreate(){
+    createdAt = Instant.now();
+  }
+
+  @PreUpdate
+  public void preUpdate(){
+    updatedAt = Instant.now();
   }
 
 }
