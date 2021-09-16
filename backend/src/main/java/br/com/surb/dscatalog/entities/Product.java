@@ -16,8 +16,10 @@ public class Product implements Serializable {
   private static final long serialVersionUID = 694675675061996281L;
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
+  @Column(columnDefinition = "TEXT")
   private String description;
   private Double price;
   private String imgUrl;
@@ -27,7 +29,8 @@ public class Product implements Serializable {
   @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant updatedAt;
 
-  
+  @ManyToMany
+  @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
   Set<Category> categories = new HashSet<>();
 
   public Product(){}
