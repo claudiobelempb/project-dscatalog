@@ -1,7 +1,10 @@
 package br.com.surb.dscatalog.services;
 
+import br.com.surb.dscatalog.dto.CategoryDTO;
 import br.com.surb.dscatalog.dto.ProductDTO;
+import br.com.surb.dscatalog.entities.Category;
 import br.com.surb.dscatalog.entities.Product;
+import br.com.surb.dscatalog.repositories.CategoryRepository;
 import br.com.surb.dscatalog.repositories.ProductRepository;
 import br.com.surb.dscatalog.services.exceptions.DataBaseException;
 import br.com.surb.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -22,6 +25,9 @@ public class ProductService {
   @Autowired
   private ProductRepository productRepository;
 
+  @Autowired
+  private CategoryRepository categoryRepository;
+
   @Transactional(readOnly = true)
   public Page<ProductDTO> index(PageRequest pageRequest) {
     Page<Product> products = productRepository.findAll(pageRequest);
@@ -38,11 +44,7 @@ public class ProductService {
   @Transactional
   public ProductDTO create(ProductDTO productDTO) {
     Product product = new Product();
-    product.setName(productDTO.getName());
-    product.setDescription(productDTO.getDescription());
-    product.setPrice(productDTO.getPrice());
-    product.setImgUrl(productDTO.getImgUrl());
-    product.setCreatedAt(productDTO.getCreatedAt());
+    copyDtoToEntity(productDTO, product);
     product = productRepository.save(product);
     return new ProductDTO(product);
   }
@@ -51,11 +53,7 @@ public class ProductService {
   public ProductDTO update(Long id, ProductDTO productDTO) {
     try {
       Product product = productRepository.getOne(id);
-      product.setName(productDTO.getName());
-      product.setDescription(productDTO.getDescription());
-      product.setPrice(productDTO.getPrice());
-      product.setImgUrl(productDTO.getImgUrl());
-      product.setCreatedAt(productDTO.getCreatedAt());
+      copyDtoToEntity(productDTO, product);
       product = productRepository.save(product);
       return new ProductDTO(product);
     } catch (EntityNotFoundException e){
@@ -72,5 +70,19 @@ public class ProductService {
       throw new DataBaseException("Integrity violation");
     }
   }
+
+  private void copyDtoToEntity(ProductDTO productDTO, Product product){
+    product.setName(productDTO.getName());
+    product.setDescription(productDTO.getDescription());
+    product.setPrice(productDTO.getPrice());
+    product.setImgUrl(productDTO.getImgUrl());
+    product.setCreatedAt(productDTO.getCreatedAt());
+
+    product.getCategories().clear();
+    for (CategoryDTO categoryDTO : productDTO.getCategories()) {
+      Category category = categoryRepository.getOne(categoryDTO.getId());
+      product.getCategories().add(category);
+    }
+}
 
 }
