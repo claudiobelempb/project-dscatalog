@@ -5,8 +5,8 @@ type ContentProps = {
   children: React.ReactNode;
 };
 
-const Content: React.FC<ContentProps> = ({ children }) => {
+const ContentDefault: React.FC<ContentProps> = ({ children }) => {
   return <ContentContainer>{children}</ContentContainer>;
 };
 
-export { Content };
+export { ContentDefault };

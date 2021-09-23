@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const LayoutContainer = styled.div`
+export const HeaderContainer = styled.header`
+  height: 70px;
   ${({ theme }) => css`
-    max-width: 100%;
-    height: 100%;
+    background: ${theme.colors.blue_100};
     @media only screen and ${theme.medias.mx} {
-      grid-template-columns: 1fr;
+      height: auto;
     }
   `}
 `;

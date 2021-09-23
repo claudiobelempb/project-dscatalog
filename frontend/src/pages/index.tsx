@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { Button } from '../components/Button';
-import { Heading } from '../components/Heading';
+import { ButtonDefault } from '../components/ButtonDefault';
+import { HeadingDefault } from '../components/HeadingDefault';
 import { LayoutHome } from '../components/LayoutHome';
-import { Text } from '../components/Text';
+import { TextDefault } from '../components/TextDefault';
 import styles from './styles.module.scss';
+import { GridDefault } from '../components/GridDefault';
 
 const ImgHome = '/images/desenho.svg';
 const ImgSeta = '/images/seta-bacgound.svg';
@@ -19,17 +20,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome title={'Home'}>
-        <div className={'shadow box-shadow'}>
-          <div className={'grid-2'}>
-            <div className={''}>
-              <Heading target={'h3'}>
+        <GridDefault>
+          <GridDefault size={2}>
+            <GridDefault>
+              <HeadingDefault target={'h3'}>
                 Conheça o melhor catálogo de produtos
-              </Heading>
-              <Text mb={10}>
+              </HeadingDefault>
+              <TextDefault mb={10}>
                 Ajudaremos você a encontrar os melhores produtos disponíveis no
                 mercado.
-              </Text>
-              <Button
+              </TextDefault>
+              <ButtonDefault
                 icon
                 src={ImgSeta}
                 size={'medium'}
@@ -37,16 +38,17 @@ const Home: NextPage = () => {
                 onClick={() => console.log('Click')}
               >
                 Button
-              </Button>
-            </div>
+              </ButtonDefault>
+            </GridDefault>
+
             <Image
               src={ImgHome}
-              alt={'Imagem buscarndo por um produto'}
+              alt={'Imagem buscando por um produto'}
               width={650}
               height={480}
             />
-          </div>
-        </div>
+          </GridDefault>
+        </GridDefault>
       </LayoutHome>
     </div>
   );

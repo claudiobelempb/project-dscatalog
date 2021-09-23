@@ -14,7 +14,7 @@ type HeadingProps = {
   uppercase?: boolean;
 };
 
-export const Heading: React.FC<HeadingProps> = ({
+export const HeadingDefault: React.FC<HeadingProps> = ({
   children,
   color = '',
   target = 'h1',
@@ -89,5 +89,5 @@ export const Heading: React.FC<HeadingProps> = ({
     }
   };
 
-  return <div>{renderHeading()}</div>;
+  return renderHeading();
 };

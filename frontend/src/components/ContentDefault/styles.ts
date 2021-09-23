@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components';
 
-export const HeaderContainer = styled.header`
+export const ContentContainer = styled.div`
+  max-width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 2rem;
   ${({ theme }) => css`
-    height: 70px;
-    background: ${theme.colors.blue_100};
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
     }

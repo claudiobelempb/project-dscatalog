@@ -1,15 +1,16 @@
 import React from 'react';
-import { Brand } from '../../components/Brand';
-import { Footer } from '../../components/Footer';
+import { BrandDefault } from '../BrandDefault';
+import { FooterDefault } from '../FooterDefault';
 import { Nav } from '../../components/Nav';
-import { Header } from '../../components/Header';
-import { Main } from '../../components/Main';
-import { Content } from '../../components/Content';
+import { HeaderDefault } from '../HeaderDefault';
+import { MainDefault } from '../MainDefault';
+import { ContentDefault } from '../ContentDefault';
 import { mock } from '../../components/Nav/mock';
-import { Button } from '../Button';
-import { Heading } from '../Heading';
+import { ButtonDefault } from '../ButtonDefault';
+import { HeadingDefault } from '../HeadingDefault';
 import { LayoutHomeContainer } from './styles';
-import { Container } from '../Container';
+import { ContainerDefault } from '../ContainerDefault';
+import { GridDefault } from '../GridDefault';
 
 const ImgBrand = '/images/brand.svg';
 
@@ -21,16 +22,16 @@ type LayoutHomeProps = {
 const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
   return (
     <LayoutHomeContainer>
-      <Header>
-        <div className={'grid-2'}>
-          <Brand src={ImgBrand} />
+      <HeaderDefault>
+        <GridDefault size={2}>
+          <BrandDefault src={ImgBrand} />
           <Nav links={mock} />
-        </div>
-      </Header>
-      <Main>{children}</Main>
-      {/* <Footer>
+        </GridDefault>
+      </HeaderDefault>
+      <MainDefault>{children}</MainDefault>
+      {/* <FooterDefault>
         <h1>Footer</h1>
-      </Footer> */}
+      </FooterDefault> */}
     </LayoutHomeContainer>
   );
 };

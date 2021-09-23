@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components';
 
 export const ButtonDefault = styled.button`
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  height: 4rem;
+  padding: 0.3rem 1rem;
+  margin-right: 0.2rem;
+  max-width: 20rem;
+  min-width: 20rem;
   ${({ theme }) => css`
     background-color: ${theme.colors.blue_100};
     color: ${theme.colors.white_100};
-    border-radius: 0.3rem;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    height: 4rem;
-    padding: 0.3rem 1rem;
-    margin-right: 0.2rem;
-    max-width: 20rem;
-    min-width: 20rem;
 
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
@@ -22,6 +22,15 @@ export const ButtonDefault = styled.button`
 
 export const ButtonLarge = styled.button`
   position: relative;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  height: 4rem;
+  padding: 0.3rem 1rem;
+  margin-right: 0.2rem;
+  max-width: 20rem;
+  min-width: 20rem;
 
   & > div {
     display: block !important;
@@ -33,15 +42,6 @@ export const ButtonLarge = styled.button`
   ${({ theme }) => css`
     background-color: ${theme.colors.blue_100};
     color: ${theme.colors.white_100};
-    border-radius: 0.3rem;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    height: 4rem;
-    padding: 0.3rem 1rem;
-    margin-right: 0.2rem;
-    max-width: 20rem;
-    min-width: 20rem;
 
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
@@ -51,6 +51,15 @@ export const ButtonLarge = styled.button`
 
 export const ButtonMedium = styled.button`
   position: relative;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 3rem;
+  padding: 0.3rem 1rem;
+  margin-right: 0.2rem;
+  max-width: 16rem;
+  min-width: 16rem;
 
   & > div {
     display: block !important;
@@ -63,15 +72,7 @@ export const ButtonMedium = styled.button`
   ${({ theme }) => css`
     background-color: ${theme.colors.blue_100};
     color: ${theme.colors.white_100};
-    border-radius: 0.3rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-weight: 700;
-    height: 3rem;
-    padding: 0.3rem 1rem;
-    margin-right: 0.2rem;
-    max-width: 16rem;
-    min-width: 16rem;
+
 
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;

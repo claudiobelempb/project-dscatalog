@@ -1,11 +1,5 @@
 import Image from 'next/image';
-import {
-  ButtonDefault,
-  ButtonLarge,
-  ButtonMedium,
-  ButtonSmall,
-  ButtonFull,
-} from './styles';
+import { ButtonLarge, ButtonMedium, ButtonSmall, ButtonFull } from './styles';
 
 type HeadingProps = {
   size?: 'large' | 'medium' | 'small' | 'full';
@@ -18,7 +12,7 @@ type HeadingProps = {
   src: string;
 };
 
-export const Button: React.FC<HeadingProps> = ({
+export const ButtonDefault: React.FC<HeadingProps> = ({
   color = false,
   size = `large`,
   uppercase,
@@ -75,15 +69,16 @@ export const Button: React.FC<HeadingProps> = ({
 
       default:
         return (
-          <ButtonDefault
+          <ButtonLarge
             onClick={onClick}
             className={`${isColor} ${size} ${isUppercase}`}
           >
             {title}
-          </ButtonDefault>
+            {icon ? <Image src={src} alt={alt} width={60} height={60} /> : ''}
+          </ButtonLarge>
         );
     }
   };
 
-  return <div>{renderButton()}</div>;
+  return renderButton();
 };

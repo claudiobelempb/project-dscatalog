@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const LayoutHomeContainer = styled.div`
+  height: 100vh;
   ${({ theme }) => css`
-    height: 100vh;
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
     }

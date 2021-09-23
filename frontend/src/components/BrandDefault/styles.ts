@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 
-export const ContentContainer = styled.div`
+export const BrandContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 0;
   ${({ theme }) => css`
-    max-width: 90%;
-    height: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 0 2rem;
+    /* background: ${theme.colors.white_100}; */
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
     }

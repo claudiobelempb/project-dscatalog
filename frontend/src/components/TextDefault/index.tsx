@@ -8,7 +8,7 @@ type HeadingProps = {
   mb?: string | number;
 };
 
-export const Text: React.FC<HeadingProps> = ({
+export const TextDefault: React.FC<HeadingProps> = ({
   children,
   color = '',
   target = 'p',
@@ -66,5 +66,5 @@ export const Text: React.FC<HeadingProps> = ({
     }
   };
 
-  return <div>{renderText()}</div>;
+  return renderText();
 };

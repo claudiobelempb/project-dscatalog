@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
 export const NavContainer = styled.nav`
+  display: flex;
+  height: 100%;
   ${({ theme }) => css`
-    display: flex;
     /* background: ${theme.colors.red_100}; */
     color: ${theme.colors.white_100};
 

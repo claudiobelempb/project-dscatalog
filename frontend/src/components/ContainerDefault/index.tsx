@@ -4,8 +4,8 @@ type ContainerProps = {
   children: React.ReactNode;
 };
 
-const Container: React.FC<ContainerProps> = ({ children }) => {
+const ContainerDefault: React.FC<ContainerProps> = ({ children }) => {
   return <LayoutContainer>{children}</LayoutContainer>;
 };
 
-export { Container };
+export { ContainerDefault };
