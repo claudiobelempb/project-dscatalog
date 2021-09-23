@@ -4,14 +4,12 @@ import br.com.surb.dscatalog.dto.ClientDTO;
 import br.com.surb.dscatalog.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/clients")
@@ -21,14 +19,8 @@ public class ClientResource {
   private ClientService clientService;
 
   @GetMapping
-  public ResponseEntity<Page<ClientDTO>> index(
-    @RequestParam(value = "page", defaultValue = "0") Integer page,
-    @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
-    @RequestParam(value = "direction", defaultValue = "DESC") String direction,
-    @RequestParam(value = "orderBy", defaultValue = "createdAt") String orderBy
-  ){
-    PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-    Page<ClientDTO> clientDTOS = clientService.index(pageRequest);
+  public ResponseEntity<Page<ClientDTO>> index(Pageable pageable){
+    Page<ClientDTO> clientDTOS = clientService.index(pageable);
     System.out.println(clientDTOS);
     return ResponseEntity.ok().body(clientDTOS);
   }
