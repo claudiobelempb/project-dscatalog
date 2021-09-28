@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -40,6 +39,6 @@ public class ProductServiceTests {
 
     Mockito.verify(productRepository, Mockito.times(1)).deleteById(existingId);
   }
-  
+
 
 }
