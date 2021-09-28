@@ -11,8 +11,10 @@ import { HeadingDefault } from '../HeadingDefault';
 import { LayoutHomeContainer } from './styles';
 import { ContainerDefault } from '../ContainerDefault';
 import { GridDefault } from '../GridDefault';
+import { InputDefault } from '../InputDefault';
 
 const ImgBrand = '/images/brand.svg';
+const ImgSearch = '/images/btn-search.svg';
 
 type LayoutHomeProps = {
   children?: React.ReactNode;
@@ -23,8 +25,13 @@ const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
   return (
     <LayoutHomeContainer>
       <HeaderDefault>
-        <GridDefault size={2}>
+        <GridDefault size={3}>
           <BrandDefault src={ImgBrand} />
+          <InputDefault
+            src={ImgSearch}
+            onClick={() => console.log('Click')}
+            icon
+          />
           <Nav links={mock} />
         </GridDefault>
       </HeaderDefault>

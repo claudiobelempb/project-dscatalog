@@ -36,7 +36,7 @@ export const GridThree = styled.div`
   height: 100%;
   align-items: center;
   ${({ theme }) => css`
-    background-color: ${theme.colors.blue_50};
+    /* background-color: ${theme.colors.blue_50}; */
     @media only screen and ${theme.medias.mx} {
       grid-template-columns: 1fr;
     }

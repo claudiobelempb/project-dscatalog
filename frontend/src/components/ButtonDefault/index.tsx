@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { ButtonLarge, ButtonMedium, ButtonSmall, ButtonFull } from './styles';
 
 type HeadingProps = {
-  size?: 'large' | 'medium' | 'small' | 'full';
+  size?: 'large' | 'medium' | 'small' | 'full' | 'search';
   color?: boolean;
   uppercase?: boolean;
   title: string;
@@ -57,6 +57,16 @@ export const ButtonDefault: React.FC<HeadingProps> = ({
           </ButtonSmall>
         );
       case 'full':
+        return (
+          <ButtonFull
+            onClick={onClick}
+            className={`${isColor} ${size} ${isUppercase}`}
+          >
+            {title}
+            {icon ? <Image src={src} alt={alt} width={48} height={48} /> : ''}
+          </ButtonFull>
+        );
+      case 'search':
         return (
           <ButtonFull
             onClick={onClick}
