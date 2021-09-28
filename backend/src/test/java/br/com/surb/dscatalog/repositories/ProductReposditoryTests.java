@@ -39,6 +39,20 @@ public class ProductReposditoryTests {
   }
 
   @Test
+  public void saveShouldNotEmptyWhenIdExists(){
+    productRepository.findById(existingId);
+    Optional<Product> product = productRepository.findById(nonExistingId);
+    Assertions.assertFalse(product.isPresent());
+  }
+
+  @Test
+  public void saveShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist(){
+    productRepository.findById(existingId);
+    Optional<Product> product = productRepository.findById(existingId);
+    Assertions.assertFalse(product.isEmpty());
+  }
+
+  @Test
   public void deleteShouldDeleteObjetcWhenIdExists() {
     productRepository.deleteById(existingId);
     Optional<Product> product = productRepository.findById(existingId);

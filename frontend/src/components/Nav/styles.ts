@@ -23,6 +23,7 @@ export const NavContainer = styled.nav`
     }
 
     @media only screen and ${theme.medias.mx} {
+      display: block;
       grid-template-columns: 1fr;
     }
   `}

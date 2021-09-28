@@ -31,6 +31,8 @@ const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
             src={ImgSearch}
             onClick={() => console.log('Click')}
             icon
+            placeholder={'Search...'}
+            onChange={() => alert('Onchance')}
           />
           <Nav links={mock} />
         </GridDefault>
