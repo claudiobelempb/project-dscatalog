@@ -68,6 +68,40 @@ public class ProductServiceTests {
   }
 
   @Test
+  public void showShouldReturnPage() {
+    Assertions.assertDoesNotThrow(() -> {
+      productService.show(existingId);
+    });
+    Mockito.verify(productRepository, Mockito.times(1)).findById(existingId);
+  }
+
+  @Test
+  public void showShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
+    Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+      productService.show(nonExistingId);
+    });
+
+    Mockito.verify(productRepository, Mockito.times(1)).findById(nonExistingId);
+  }
+
+//  @Test
+//  public void updateShouldReturnPage() {
+//    Assertions.assertDoesNotThrow(() -> {
+//      productService.update(existingId, productDTO);
+//    });
+//    Mockito.verify(productRepository, Mockito.times(1)).save(existingId);
+//  }
+//
+//  @Test
+//  public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
+//    Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+//      productService.update(nonExistingId, productDTO);
+//    });
+//
+//    Mockito.verify(productRepository, Mockito.times(1)).save(nonExistingId, productDTO);
+//  }
+
+  @Test
   public void deleteShouldThrowDataBaseExceptionWhenIdDoesNotExists(){
     Assertions.assertThrows(DataBaseException.class, () -> {
       productService.delete(dependentId);
