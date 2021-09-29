@@ -5,15 +5,17 @@ type LinkProps = {
   title: string;
   href: string;
   target: boolean;
-}
+};
 
-const NavLink: React.FC<LinkProps> = ({title, href, target }) => {
+const LinkDefault: React.FC<LinkProps> = ({ title, href, target }) => {
   const tab = target ? '_blank' : '_self';
   return (
     <Link href={href}>
-      <a id={styles.LinkContainer} target={tab}>{title}</a>
+      <a id={styles.LinkContainer} target={tab}>
+        {title}
+      </a>
     </Link>
   );
-}
+};
 
-export { NavLink };
+export { LinkDefault };

@@ -1,5 +1,5 @@
 import { NavContainer } from './styles';
-import { NavLink } from '../NavLink';
+import { LinkDefault } from '../LinkDefault';
 
 type LinkProps = {
   title: string;
@@ -12,12 +12,14 @@ type NavProps = {
   links: LinkProps[];
 };
 
-export const Nav: React.FC<NavProps> = ({ links }) => {
+const NavDefault: React.FC<NavProps> = ({ links }) => {
   return (
     <NavContainer>
       {links.map((link, index) => {
-        return <NavLink key={index} {...link} />;
+        return <LinkDefault key={index} {...link} />;
       })}
     </NavContainer>
   );
 };
+
+export { NavDefault };
