@@ -1,6 +1,7 @@
 package br.com.surb.dscatalog.services;
 
 import br.com.surb.dscatalog.Factory;
+import br.com.surb.dscatalog.dto.ProductDTO;
 import br.com.surb.dscatalog.entities.Product;
 import br.com.surb.dscatalog.repositories.ProductRepository;
 import br.com.surb.dscatalog.services.exceptions.DataBaseException;
@@ -15,7 +16,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -36,6 +39,7 @@ public class ProductServiceTests {
   private long dependentId;
   private PageImpl<Product> page;
   private Product product;
+  private ProductDTO productDTO;
 
   @BeforeEach
   void setUp() throws Exception {
@@ -53,6 +57,14 @@ public class ProductServiceTests {
     Mockito.doNothing().when(productRepository).deleteById(existingId);
     Mockito.doThrow(EmptyResultDataAccessException.class).when(productRepository).deleteById(nonExistingId);
     Mockito.doThrow(DataIntegrityViolationException.class).when(productRepository).deleteById(dependentId);
+  }
+
+  @Test
+  public void indexShouldReturnPage() {
+    Pageable pageable = PageRequest.of(0, 10);
+    Page<ProductDTO> productDTOS = productService.index(pageable);
+    Assertions.assertNotNull(dependentId);
+    Mockito.verify(productRepository, Mockito.times(1)).findAll(pageable);
   }
 
   @Test
