@@ -45,7 +45,7 @@ public class ProductServiceTests {
   void setUp() throws Exception {
     existingId = 1L;
     nonExistingId = 2L;
-    nonExistingId = 3L;
+    dependentId = 3L;
     product = Factory.createProduct();
     page = new PageImpl<>(List.of(product));
 
