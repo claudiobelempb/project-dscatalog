@@ -2,7 +2,7 @@ package br.com.surb.dscatalog.resources;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -12,6 +12,7 @@ import br.com.surb.dscatalog.Factory;
 import br.com.surb.dscatalog.dto.ProductDTO;
 import br.com.surb.dscatalog.entities.Product;
 import br.com.surb.dscatalog.services.ProductService;
+import br.com.surb.dscatalog.services.exceptions.DataBaseException;
 import br.com.surb.dscatalog.services.exceptions.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,6 +62,10 @@ public class ProductResourceTests {
 
     when(productService.update(eq(existingId), any())).thenReturn(productDTO);
     when(productService.update(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
+
+    doNothing().when(productService).delete(existingId);
+    doThrow(ResourceNotFoundException.class).when(productService).delete(nonExistingId);
+    doThrow(DataBaseException.class).when(productService).delete(dependentId);
   }
 
   @Test
