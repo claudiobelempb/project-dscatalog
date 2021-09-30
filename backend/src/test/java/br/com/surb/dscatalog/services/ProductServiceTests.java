@@ -2,7 +2,9 @@ package br.com.surb.dscatalog.services;
 
 import br.com.surb.dscatalog.Factory;
 import br.com.surb.dscatalog.dto.ProductDTO;
+import br.com.surb.dscatalog.entities.Category;
 import br.com.surb.dscatalog.entities.Product;
+import br.com.surb.dscatalog.repositories.CategoryRepository;
 import br.com.surb.dscatalog.repositories.ProductRepository;
 import br.com.surb.dscatalog.services.exceptions.DataBaseException;
 import br.com.surb.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -22,6 +24,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +37,16 @@ public class ProductServiceTests {
   @Mock
   private ProductRepository productRepository;
 
+  @Mock
+  private CategoryRepository categoryRepository;
+
   private long existingId;
   private long nonExistingId;
   private long dependentId;
   private PageImpl<Product> page;
   private Product product;
   private ProductDTO productDTO;
+  private Category category;
 
   @BeforeEach
   void setUp() throws Exception {
@@ -47,12 +54,21 @@ public class ProductServiceTests {
     nonExistingId = 2L;
     dependentId = 3L;
     product = Factory.createProduct();
+    productDTO = Factory.createProductDTO();
+    category = Factory.createCategory();
     page = new PageImpl<>(List.of(product));
 
     Mockito.when(productRepository.findAll((Pageable) ArgumentMatchers.any())).thenReturn(page);
     Mockito.when(productRepository.save(ArgumentMatchers.any())).thenReturn(product);
+
     Mockito.when(productRepository.findById(existingId)).thenReturn(Optional.of(product));
     Mockito.when(productRepository.findById(nonExistingId)).thenReturn(Optional.empty());
+
+    Mockito.when(productRepository.getOne(existingId)).thenReturn(product);
+    Mockito.when(productRepository.getOne(nonExistingId)).thenThrow(ResourceNotFoundException.class);
+
+    Mockito.when(categoryRepository.getOne(existingId)).thenReturn(category);
+    Mockito.when(categoryRepository.getOne(nonExistingId)).thenThrow(ResourceNotFoundException.class);
 
     Mockito.doNothing().when(productRepository).deleteById(existingId);
     Mockito.doThrow(EmptyResultDataAccessException.class).when(productRepository).deleteById(nonExistingId);
@@ -68,10 +84,9 @@ public class ProductServiceTests {
   }
 
   @Test
-  public void showShouldReturnPage() {
-    Assertions.assertDoesNotThrow(() -> {
-      productService.show(existingId);
-    });
+  public void showShouldReturnProductDTOWhenIdExists() {
+    ProductDTO productDTO = productService.show(existingId);
+    Assertions.assertNotNull(productDTO);
     Mockito.verify(productRepository, Mockito.times(1)).findById(existingId);
   }
 
@@ -84,22 +99,19 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).findById(nonExistingId);
   }
 
-//  @Test
-//  public void updateShouldReturnPage() {
-//    Assertions.assertDoesNotThrow(() -> {
-//      productService.update(existingId, productDTO);
-//    });
-//    Mockito.verify(productRepository, Mockito.times(1)).save(existingId);
-//  }
-//
-//  @Test
-//  public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
-//    Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-//      productService.update(nonExistingId, productDTO);
-//    });
-//
-//    Mockito.verify(productRepository, Mockito.times(1)).save(nonExistingId, productDTO);
-//  }
+  @Test
+  public void updateShouldReturnProductDTOWhenIdExists() {
+    ProductDTO result = productService.update(existingId, productDTO);
+    Assertions.assertNotNull(result);
+    
+  }
+
+  @Test
+  public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
+    Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+      productService.update(nonExistingId, productDTO);
+    });
+  }
 
   @Test
   public void deleteShouldThrowDataBaseExceptionWhenIdDoesNotExists(){
