@@ -5,38 +5,63 @@ import { InputContainer, InputDefaultSmall, InputIconDefault } from './styles';
 const ImgSearch = './images/btn-search.svg';
 
 type ImputDefaultProps = {
+  label?: string;
   placeholder: string;
-  type?: 'search' | 'medium' | 'small' | 'full' | 'search';
+  type?: 'text' | 'number' | 'search' | 'full' | 'search';
   color?: boolean;
-  onClick: () => void;
-  onChange: () => void;
+  InputOnClick: () => void;
+  InputOnChange: () => void;
   icon?: boolean;
   alt?: string;
-  src: string;
 };
 
 export const InputDefault: React.FC<ImputDefaultProps> = ({
+  label,
   color = false,
-  type = `search`,
+  type = 'Text alternative',
   icon = false,
   alt,
-  src,
-  onClick,
-  onChange,
+  InputOnClick,
+  InputOnChange,
   placeholder,
 }) => {
-  const isColor = color ? color : 'color_black-500';
+  const isColor = color ?? 'color_black-500';
   const renderInput = () => {
     switch (type) {
       case 'search':
         return (
-          <InputContainer onChange={onChange}>
+          <InputContainer onChange={InputOnChange}>
+            <label htmlFor="">{label ?? ''}</label>
             <InputDefaultSmall
               className={`${isColor} ${type}`}
-              placeholder={placeholder}
+              placeholder={placeholder ?? 'Digíte um placeholder'}
+              type={type ?? 'text'}
+              alt={alt ?? 'Text alternative'}
             />
             {icon ? (
-              <InputIconDefault onClick={onClick}>
+              <InputIconDefault onClick={InputOnClick}>
+                {/* <Image src={src} alt={alt} width={20} height={20} /> */}
+                {/* <FaAlignJustify color={'red'} size={30} /> */}
+                <FaSearch color={'red'} size={30} />
+              </InputIconDefault>
+            ) : (
+              ''
+            )}
+          </InputContainer>
+        );
+
+      case 'number':
+        return (
+          <InputContainer onChange={InputOnChange}>
+            <label htmlFor="">{label ?? ''}</label>
+            <InputDefaultSmall
+              className={`${isColor} ${type}`}
+              placeholder={placeholder ?? 'Digíte um placeholder'}
+              type={type ?? 'number'}
+              alt={alt ?? 'Text alternative'}
+            />
+            {icon ? (
+              <InputIconDefault onClick={InputOnClick}>
                 {/* <Image src={src} alt={alt} width={20} height={20} /> */}
                 {/* <FaAlignJustify color={'red'} size={30} /> */}
                 <FaSearch color={'red'} size={30} />
@@ -49,16 +74,24 @@ export const InputDefault: React.FC<ImputDefaultProps> = ({
 
       default:
         return (
-          <>
-            <InputDefaultSmall className={`${isColor} ${type}`} />
+          <InputContainer onChange={InputOnChange}>
+            <label htmlFor="">{label ?? ''}</label>
+            <InputDefaultSmall
+              className={`${isColor} ${type}`}
+              placeholder={placeholder ?? 'Digíte um placeholder'}
+              type={type}
+              alt={alt}
+            />
             {icon ? (
-              <InputIconDefault onClick={onClick}>
-                <Image src={src} alt={alt} width={60} height={60} />
+              <InputIconDefault onClick={InputOnClick}>
+                {/* <Image src={src} alt={alt} width={20} height={20} /> */}
+                {/* <FaAlignJustify color={'red'} size={30} /> */}
+                <FaSearch color={'red'} size={30} />
               </InputIconDefault>
             ) : (
               ''
             )}
-          </>
+          </InputContainer>
         );
     }
   };

@@ -16,7 +16,13 @@ const NavDefault: React.FC<NavProps> = ({ links }) => {
   return (
     <NavContainer>
       {links.map((link, index) => {
-        return <LinkDefault key={index} {...link} />;
+        return (
+          <LinkDefault
+            linkOnClick={() => console.log('Click')}
+            key={index}
+            {...link}
+          />
+        );
       })}
     </NavContainer>
   );

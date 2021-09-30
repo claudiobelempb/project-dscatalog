@@ -28,11 +28,10 @@ const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
         <GridDefault size={3}>
           <BrandDefault src={ImgBrand} />
           <InputDefault
-            src={ImgSearch}
-            onClick={() => console.log('Click')}
+            InputOnClick={() => console.log('Click')}
             icon
             placeholder={'Search...'}
-            onChange={() => alert('Onchance')}
+            InputOnChange={() => alert('Onchance')}
           />
           <NavDefault links={mock} />
         </GridDefault>

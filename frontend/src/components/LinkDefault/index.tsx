@@ -1,21 +1,32 @@
+import { ReactDOM } from 'react';
 import Link from 'next/link';
-import styles from './styles.module.scss';
+import { LinkContainer } from './styles';
 
 type LinkProps = {
+  icon?: ReactDOM;
   title: string;
   href: string;
   target: boolean;
+  linkOnClick: () => void;
 };
 
-const LinkDefault: React.FC<LinkProps> = ({ title, href, target }) => {
+export const LinkDefault: React.FC<LinkProps> = ({
+  title,
+  href,
+  target,
+  linkOnClick,
+  icon,
+}) => {
   const tab = target ? '_blank' : '_self';
-  return (
-    <Link href={href}>
-      <a id={styles.LinkContainer} target={tab}>
-        {title}
-      </a>
-    </Link>
-  );
-};
 
-export { LinkDefault };
+  const renderLink = () => {
+    return (
+      <LinkContainer>
+        {icon}
+        {title}
+      </LinkContainer>
+    );
+  };
+
+  return <Link href={href}>{renderLink()}</Link>;
+};
