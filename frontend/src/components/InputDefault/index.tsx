@@ -42,7 +42,7 @@ export const InputDefault: React.FC<ImputDefaultProps> = ({
               <InputIconDefault onClick={InputOnClick}>
                 {/* <Image src={src} alt={alt} width={20} height={20} /> */}
                 {/* <FaAlignJustify color={'red'} size={30} /> */}
-                <FaSearch color={'red'} size={30} />
+                <FaSearch size={30} />
               </InputIconDefault>
             ) : (
               ''

@@ -75,6 +75,7 @@ public class ProductServiceTests {
     Mockito.doThrow(DataIntegrityViolationException.class).when(productRepository).deleteById(dependentId);
   }
 
+  /*index deveria retornar um Page*/
   @Test
   public void indexShouldReturnPage() {
     Pageable pageable = PageRequest.of(0, 10);
@@ -83,6 +84,7 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).findAll(pageable);
   }
 
+  /*show deveria retornar um ProductDTO quando o id existir*/
   @Test
   public void showShouldReturnProductDTOWhenIdExists() {
     ProductDTO productDTO = productService.show(existingId);
@@ -90,6 +92,7 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).findById(existingId);
   }
 
+  /*show deveria retornar um ProductDTO quando o id not existir*/
   @Test
   public void showShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
     Assertions.assertThrows(ResourceNotFoundException.class, () -> {
@@ -99,6 +102,7 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).findById(nonExistingId);
   }
 
+  /*update deveria retornar um ProductDTO quando o id existir*/
   @Test
   public void updateShouldReturnProductDTOWhenIdExists() {
     ProductDTO result = productService.update(existingId, productDTO);
@@ -106,6 +110,7 @@ public class ProductServiceTests {
     
   }
 
+  /*update deveria retornar um ThrowResourceNotFoundException quando o id not existir*/
   @Test
   public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
     Assertions.assertThrows(ResourceNotFoundException.class, () -> {
@@ -113,6 +118,7 @@ public class ProductServiceTests {
     });
   }
 
+  /*update deveria retornar um ThrowDataBaseException quando o id not existir*/
   @Test
   public void deleteShouldThrowDataBaseExceptionWhenIdDoesNotExists(){
     Assertions.assertThrows(DataBaseException.class, () -> {
@@ -122,6 +128,7 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).deleteById(dependentId);
   }
 
+  /*delete deveria retornar um ThrowResourceNotFoundException quando o id not existir*/
   @Test
   public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
     Assertions.assertThrows(ResourceNotFoundException.class, () -> {
@@ -131,6 +138,7 @@ public class ProductServiceTests {
     Mockito.verify(productRepository, Mockito.times(1)).deleteById(nonExistingId);
   }
 
+  /*delete deveria retornar um id existir*/
   @Test
   public void deleteShouldDoNothingWhenIdExists(){
     Assertions.assertDoesNotThrow(() -> {

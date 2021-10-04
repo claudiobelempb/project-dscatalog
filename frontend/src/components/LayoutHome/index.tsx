@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { BrandDefault } from '../BrandDefault';
 import { FooterDefault } from '../FooterDefault';
 import { NavDefault } from '../NavDefault';
@@ -12,16 +12,15 @@ import { LayoutHomeContainer } from './styles';
 import { ContainerDefault } from '../ContainerDefault';
 import { GridDefault } from '../GridDefault';
 import { InputDefault } from '../InputDefault';
+import { LinkDefault } from '../LinkDefault';
 
 const ImgBrand = '/images/brand.svg';
-const ImgSearch = '/images/btn-search.svg';
 
 type LayoutHomeProps = {
-  children?: React.ReactNode;
-  title?: string;
+  children?: ReactNode;
 };
 
-const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
+const LayoutHome: React.FC<LayoutHomeProps> = ({ children }) => {
   return (
     <LayoutHomeContainer>
       <HeaderDefault>
@@ -33,7 +32,12 @@ const LayoutHome: React.FC<LayoutHomeProps> = ({ children, title }) => {
             placeholder={'Search...'}
             InputOnChange={() => alert('Onchance')}
           />
-          <NavDefault links={mock} />
+          {/* <NavDefault links={mock} /> */}
+          <NavDefault>
+            <LinkDefault href={'/'} title={'Home'}></LinkDefault>
+            <LinkDefault href={'/admin'} title={'Admin'}></LinkDefault>
+            {/* <LinkDefault links={mock}/> */}
+          </NavDefault>
         </GridDefault>
       </HeaderDefault>
       <MainDefault>{children}</MainDefault>

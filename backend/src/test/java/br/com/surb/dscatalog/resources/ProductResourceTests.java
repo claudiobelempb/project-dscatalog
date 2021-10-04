@@ -92,7 +92,7 @@ public class ProductResourceTests {
     resultActions.andExpect(status().isOk());
   }
 
-  /*findById deveria retornar um ProductDTO quando o id existir*/
+  /*show deveria retornar um ProductDTO quando o id existir*/
   @Test
   public void showShouldReturnProductWhenIdExists() throws Exception{
     ResultActions resultActions =
@@ -104,7 +104,7 @@ public class ProductResourceTests {
     resultActions.andExpect(jsonPath("$.description").exists());
   }
 
-  /*findById deveria lançar ResourceNotFoundException quando o id não existir*/
+  /*show deveria lançar ResourceNotFoundException quando o id não existir*/
   @Test
   public void showShouldReturnNotFoundWhenIdDoesNotExists() throws Exception{
     ResultActions resultActions =

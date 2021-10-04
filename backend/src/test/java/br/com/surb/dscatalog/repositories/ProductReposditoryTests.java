@@ -38,6 +38,7 @@ public class ProductReposditoryTests {
     Assertions.assertEquals(countTotalProdutc + 1, product.getId());
   }
 
+  /*show deveria retornar um ProductDTO quando o id existir*/
   @Test
   public void saveShouldNotEmptyWhenIdExists(){
     productRepository.findById(existingId);
@@ -45,6 +46,7 @@ public class ProductReposditoryTests {
     Assertions.assertFalse(product.isPresent());
   }
 
+  /*show deveria lançar ResourceNotFoundException quando o id não existir*/
   @Test
   public void saveShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist(){
     productRepository.findById(existingId);

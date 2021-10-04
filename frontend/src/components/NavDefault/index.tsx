@@ -1,31 +1,13 @@
 import { NavContainer } from './styles';
 import { LinkDefault } from '../LinkDefault';
-
-type LinkProps = {
-  title: string;
-  href: string;
-  target: boolean;
-  active: boolean;
-};
+import { ReactNode } from 'react';
 
 type NavProps = {
-  links: LinkProps[];
+  children: ReactNode;
 };
 
-const NavDefault: React.FC<NavProps> = ({ links }) => {
-  return (
-    <NavContainer>
-      {links.map((link, index) => {
-        return (
-          <LinkDefault
-            linkOnClick={() => console.log('Click')}
-            key={index}
-            {...link}
-          />
-        );
-      })}
-    </NavContainer>
-  );
+const NavDefault: React.FC<NavProps> = ({ children }) => {
+  return <NavContainer>{children}</NavContainer>;
 };
 
 export { NavDefault };
