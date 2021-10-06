@@ -1,12 +1,17 @@
 package br.com.surb.dscatalog.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_role")
 public class Role implements Serializable {
 
   private static final long serialVersionUID = 3534551941343497454L;
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String authority;
 
