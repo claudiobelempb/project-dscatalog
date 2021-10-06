@@ -34,9 +34,9 @@ const LayoutHome: React.FC<LayoutHomeProps> = ({ children }) => {
           />
           {/* <NavDefault links={mock} /> */}
           <NavDefault>
-            <LinkDefault href={'/'} title={'Home'}></LinkDefault>
-            <LinkDefault href={'/admin'} title={'Admin'}></LinkDefault>
-            {/* <LinkDefault links={mock}/> */}
+            {/* <LinkDefault href={'/'} title={'Home'}></LinkDefault>
+            <LinkDefault href={'/admin'} title={'Admin'}></LinkDefault> */}
+            <LinkDefault links={mock} />
           </NavDefault>
         </GridDefault>
       </HeaderDefault>

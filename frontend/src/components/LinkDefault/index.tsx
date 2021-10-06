@@ -1,55 +1,56 @@
 import { ReactDOM } from 'react';
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
 import { LinkContainer } from './styles';
-import { ReactNode } from 'react';
 
-type LinkProps = {
+type ILinkProps = React.PropsWithChildren<LinkProps> & {
   icon?: ReactDOM;
   title: string;
-  href: string;
   target?: '_blank' | '_self';
   linkOnClick?: () => void;
   active?: string;
-  children?: ReactNode;
 };
 
 type NavProps = {
-  links?: LinkProps[];
+  links?: ILinkProps[];
 };
 
-type Props = LinkProps & NavProps;
+type IProps = ILinkProps & NavProps;
 
-export const LinkDefault: React.FC<Props> = ({
-  title,
+export const LinkDefault: React.FC<IProps> = ({
   href,
-  target,
+  title,
+  target = '_blank',
   linkOnClick,
   icon,
   active,
   links,
   children,
-}: Props) => {
+}) => {
   const renderLinkDefault = () => {
     return links ? (
       links.map((link, index) => (
-        <LinkContainer key={index} {...link}>
-          {console.log(link)}
-          {icon}
-          {title}
-        </LinkContainer>
+        <Link href={href} key={index}>
+          <a
+            title={link.title}
+            className={`${link.active}`}
+            target={link.target}
+          >
+            {link.icon}
+            {link.title}
+            {link.children}
+          </a>
+        </Link>
       ))
     ) : (
-      <LinkContainer
-        href={href}
-        title={title}
-        className={`${active}`}
-        target={target}
-      >
-        {icon}
-        {title}
-      </LinkContainer>
+      <Link href={href}>
+        <a title={title} className={`${active}`} target={target}>
+          {icon}
+          {title}
+          {children}
+        </a>
+      </Link>
     );
   };
 
-  return <Link href={href}>{renderLinkDefault()}</Link>;
+  return renderLinkDefault();
 };
