@@ -2,6 +2,7 @@ package br.com.surb.dscatalog.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,10 @@ public class Role implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String authority;
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant createdAt;
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant updatedAt;
 
   public Role(){}
 
@@ -37,6 +42,33 @@ public class Role implements Serializable {
   public void setAuthority(String authority) {
     this.authority = authority;
   }
+
+  @PrePersist
+  public void preCreate(){
+    createdAt = Instant.now();
+  }
+
+  public Instant getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(Instant createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Instant updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  @PreUpdate
+  public void preUpdate(){
+    updatedAt = Instant.now();
+  }
+
 
   @Override
   public boolean equals(Object o) {

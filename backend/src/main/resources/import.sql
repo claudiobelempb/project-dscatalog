@@ -1,10 +1,10 @@
 --Insert tb_role
-INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
-INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+INSERT INTO tb_role (authority, created_At) VALUES ('ROLE_OPERATOR', NOW());
+INSERT INTO tb_role (authority, created_At) VALUES ('ROLE_ADMIN', NOW());
 
 --Insert tb_user
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (first_name, last_name, email, password, created_At) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', NOW());
+INSERT INTO tb_user (first_name, last_name, email, password, created_At) VALUES ('Maria', 'Green', 'maria@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', NOW());
 
 --Insert tb_user_role
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);

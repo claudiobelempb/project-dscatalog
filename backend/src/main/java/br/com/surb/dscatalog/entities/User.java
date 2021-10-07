@@ -2,6 +2,7 @@ package br.com.surb.dscatalog.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,10 +18,15 @@ public class User implements Serializable {
   private Long id;
   private String firstName;
   private String lastName;
+  @Column(unique = true)
   private String email;
   private String password;
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant createdAt;
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant updatedAt;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "tb_user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -28,12 +34,16 @@ public class User implements Serializable {
 
   public User() {}
 
-  public User(Long id, String firstName, String lastName, String email, String password) {
+  public User(Long id, String firstName, String lastName, String email, String password, Instant createdAt,
+              Instant updatedAt, Set<Role> roles) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.roles = roles;
   }
 
   public Long getId() {
@@ -78,6 +88,32 @@ public class User implements Serializable {
 
   public Set<Role> getRoles() {
     return roles;
+  }
+
+  public Instant getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(Instant createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Instant updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  @PrePersist
+  public void preCreate() {
+    createdAt = Instant.now();
+  }
+
+  @PreUpdate
+  public void preUpdate() {
+    updatedAt = Instant.now();
   }
 
   @Override
