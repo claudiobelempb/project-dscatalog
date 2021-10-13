@@ -3,7 +3,9 @@ package br.com.surb.dscatalog.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_role")
@@ -19,6 +21,9 @@ public class Role implements Serializable {
   private Instant createdAt;
   @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant updatedAt;
+
+  @ManyToMany(mappedBy = "roles")
+  private Set<User> users = new HashSet<>();
 
   public Role(){}
 
@@ -41,6 +46,10 @@ public class Role implements Serializable {
 
   public void setAuthority(String authority) {
     this.authority = authority;
+  }
+
+  public Set<User> getUsers() {
+    return users;
   }
 
   @PrePersist

@@ -3,6 +3,10 @@ package br.com.surb.dscatalog.dto;
 import br.com.surb.dscatalog.entities.Category;
 import br.com.surb.dscatalog.entities.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,11 +17,22 @@ public class ProductDTO implements Serializable {
   private static final long serialVersionUID = 694675675061996281L;
 
   private Long id;
+
+  @NotBlank(message = "Campo obrigratório")
+  @Size(min = 5, max = 60, message = "Deve ter entre 5 e 60 caracter")
   private String name;
+
+  @NotBlank(message = "Campo obrigratório")
   private String description;
+
+  @Positive(message = "Preço deve ser um valor positivo")
   private Double price;
   private String imgUrl;
+
+  @PastOrPresent(message = "A data do produto não pode ser futura")
   private Instant createdAt;
+
+  @PastOrPresent(message = "A data do produto não pode ser futura")
   private Instant updatedAt;
 
   private List<CategoryDTO> categories = new ArrayList<>();

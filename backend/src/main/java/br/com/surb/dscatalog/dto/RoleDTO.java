@@ -1,9 +1,13 @@
 package br.com.surb.dscatalog.dto;
 
 import br.com.surb.dscatalog.entities.Role;
+import br.com.surb.dscatalog.entities.User;
 
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RoleDTO implements Serializable {
   private static final long serialVersionUID = -3275160846147522149L;

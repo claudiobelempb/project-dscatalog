@@ -1,8 +1,9 @@
 package br.com.surb.dscatalog.dto;
 
-import br.com.surb.dscatalog.entities.Role;
 import br.com.surb.dscatalog.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -12,8 +13,12 @@ public class UserDTO implements Serializable {
   private static final long serialVersionUID = -114325461620419754L;
 
   private Long id;
+
+  @NotBlank(message = "Campo obrigaatório")
   private String firstName;
   private String lastName;
+
+  @Email(message = "Email ou senha iválido")
   private String email;
   private Instant createdAt;
   private Instant updatedAt;

@@ -106,6 +106,7 @@ public class User implements Serializable {
     this.updatedAt = updatedAt;
   }
 
+
   @PrePersist
   public void preCreate() {
     createdAt = Instant.now();
