@@ -18,15 +18,19 @@ public class ProductDTO implements Serializable {
 
   private Long id;
 
-  @NotBlank(message = "Campo obrigratório")
+  @NotBlank(message = "Campo nome é obrigratório")
   @Size(min = 5, max = 60, message = "Deve ter entre 5 e 60 caracter")
   private String name;
 
-  @NotBlank(message = "Campo obrigratório")
+  @NotBlank(message = "Campo descrição é obrigratório")
+  @Size(min = 5, max = 220, message = "Deve ter entre 5 e 220 caracter")
   private String description;
 
   @Positive(message = "Preço deve ser um valor positivo")
   private Double price;
+
+  @NotBlank(message = "Campo imgURL é obrigratório")
+  @Size(min = 5, max = 60, message = "Deve ter entre 5 e 220 caracter")
   private String imgUrl;
 
   @PastOrPresent(message = "A data do produto não pode ser futura")

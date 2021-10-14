@@ -5,6 +5,9 @@ import br.com.surb.dscatalog.entities.Category;
 import javax.persistence.Column;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -13,10 +16,15 @@ public class CategoryDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Long id;
+
+  @NotBlank(message = "Campo nome é obrigatório")
+  @Size(min = 5, max = 30, message = "Campo nome deve ter entre 5 e 30 caracter")
   private String name;
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+
+  @PastOrPresent(message = "Data inválida")
   private Instant createdAt;
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+
+  @PastOrPresent(message = "Data inválida")
   private Instant updatedAt;
 
   public CategoryDTO(){}
@@ -59,13 +67,4 @@ public class CategoryDTO implements Serializable {
     return updatedAt;
   }
 
-  @PrePersist
-  public void preCreate(){
-    createdAt = Instant.now();
-  }
-
-  @PreUpdate
-  public void preUpdate(){
-    updatedAt = Instant.now();
-  }
 }

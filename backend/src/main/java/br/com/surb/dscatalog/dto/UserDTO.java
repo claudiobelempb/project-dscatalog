@@ -4,6 +4,7 @@ import br.com.surb.dscatalog.entities.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -14,12 +15,17 @@ public class UserDTO implements Serializable {
 
   private Long id;
 
-  @NotBlank(message = "Campo obrigaatório")
+  @NotBlank(message = "Campo nome obrigratório")
+  @Size(min = 5, message = "Campo nome deve ter entre 5 e 30 caracter")
   private String firstName;
+
+  @NotBlank(message = "Campo sobrenome obrigratório")
+  @Size(min = 5, message = "Campo sobrenome deve ter entre 5 e 30 caracter")
   private String lastName;
 
-  @Email(message = "Email ou senha iválido")
+  @Email(message = "Campo Email ou senha iválido")
   private String email;
+
   private Instant createdAt;
   private Instant updatedAt;
 

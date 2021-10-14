@@ -1,8 +1,11 @@
 package br.com.surb.dscatalog.dto;
 
 import br.com.surb.dscatalog.entities.Client;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -11,18 +14,17 @@ public class ClientDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Long id;
+
+  @NotBlank(message = "Campo nome obrigratório")
+  @Size(min = 5, max = 30, message = "Campo sobrenome deve ter entre 5 e 30 caracter")
   private String name;
+
   private String cpf;
   private Double income;
   private Integer children;
 
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant birthDate;
-
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant createdAt;
-
-  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant updatedAt;
 
   public ClientDTO(){}
@@ -104,16 +106,6 @@ public class ClientDTO implements Serializable {
 
   public Instant getUpdatedAt() {
     return updatedAt;
-  }
-
-  @PrePersist
-  public void preCreate(){
-    createdAt = Instant.now();
-  }
-
-  @PreUpdate
-  public void preUpdate(){
-    updatedAt = Instant.now();
   }
 
 }

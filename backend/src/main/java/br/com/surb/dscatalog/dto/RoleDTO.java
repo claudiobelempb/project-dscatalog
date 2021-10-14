@@ -4,6 +4,8 @@ import br.com.surb.dscatalog.entities.Role;
 import br.com.surb.dscatalog.entities.User;
 
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -13,6 +15,9 @@ public class RoleDTO implements Serializable {
   private static final long serialVersionUID = -3275160846147522149L;
 
   private Long id;
+
+  @NotBlank(message = "Campo nome é obrigatório")
+  @Size(min = 5, max = 30, message = "Campo autorização deve ter entre 5 e 30 caracter")
   private String authority;
   private Instant createdAt;
   private Instant updatedAt;
