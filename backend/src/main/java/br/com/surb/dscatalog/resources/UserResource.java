@@ -2,6 +2,7 @@ package br.com.surb.dscatalog.resources;
 
 import br.com.surb.dscatalog.dto.UserCreateDTO;
 import br.com.surb.dscatalog.dto.UserDTO;
+import br.com.surb.dscatalog.dto.UserUpdateDTO;
 import br.com.surb.dscatalog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,8 +44,8 @@ public class UserResource {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<UserDTO> update(@Valid @PathVariable Long id, @RequestBody UserDTO userDTO){
-    userDTO = userService.update(id, userDTO);
+  public ResponseEntity<UserDTO> update(@Valid @PathVariable Long id, @RequestBody UserUpdateDTO userUpdateDTO){
+    UserDTO userDTO = userService.update(id, userUpdateDTO);
     return ResponseEntity.ok().body(userDTO);
   }
 

@@ -3,6 +3,7 @@ package br.com.surb.dscatalog.services;
 import br.com.surb.dscatalog.dto.RoleDTO;
 import br.com.surb.dscatalog.dto.UserCreateDTO;
 import br.com.surb.dscatalog.dto.UserDTO;
+import br.com.surb.dscatalog.dto.UserUpdateDTO;
 import br.com.surb.dscatalog.entities.Role;
 import br.com.surb.dscatalog.entities.User;
 import br.com.surb.dscatalog.repositories.RoleRepository;
@@ -61,10 +62,10 @@ public class UserService {
   }
 
   @Transactional
-  public UserDTO update(Long id, UserDTO userDTO) {
+  public UserDTO update(Long id, UserUpdateDTO userUpdateDTO) {
     try {
       User user = userRepository.getOne(id);
-      copyUserCreateDto(userDTO, user);
+      copyUserCreateDto(userUpdateDTO, user);
       user = userRepository.save(user);
       return new UserDTO(user);
     } catch (EntityNotFoundException e){
