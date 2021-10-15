@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+<!--		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>-->
 	</properties>
 
 	<dependencies>
@@ -88,9 +88,9 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>Hoxton.SR8</version>
 				<type>pom</type>
-				<scope>import</scope>
+				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
